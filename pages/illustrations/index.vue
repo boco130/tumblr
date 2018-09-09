@@ -3,8 +3,8 @@
   <div class="headig">
     <h1>illustlations</h1>
   </div>
-  {{ store }}
-  <ul class="illustList">
+  {{ tumblrData }}
+  <!-- <ul class="illustList">
     <li
       v-for="tumblrData in tumblrData"
       v-bind:key="tumblrData.id"
@@ -14,7 +14,7 @@
         :width = tumblrData.photos[0].alt_sizes[2].width
         :height = tumblrData.photos[0].alt_sizes[2].height>
     </li>
-  </ul>
+  </ul> -->
 </div>
 </template>
 
@@ -32,12 +32,18 @@ export default {
   asyncData ({}) {
     let domain = process.env.API_URL
     let apikey = process.env.API_KEY
-    var url = 'http://api.tumblr.com/v2/blog/' + domain + '/posts?api_key=' + apikey 
+    var url = 'http://api.tumblr.com/v2/blog/' + domain + '/posts/photo?api_key=' + apikey 
     return axios.get(url)
       .then((res) => {
-        return { tumblrData: res.data.response.posts }
+        return { totalPosts: res.data.response.blog.posts }
+      }).then((res2) => {
+        if(res < 20) {
+          console.log("すくない")
+        }else{
+          console.log("おおい")
+        }
       })
-  }
+  },
 }
 </script>
 
