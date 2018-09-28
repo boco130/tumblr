@@ -3,7 +3,6 @@
   <div class="headig">
     <h1>illustlations</h1>
   </div>
-  {{ store }}
   <ul class="illustList">
     <li
       v-for="tumblrData in tumblrData"
