@@ -14,9 +14,14 @@
         :height = tumblrData.photos[0].alt_sizes[2].height>
     </li>
   </ul>
-  <ul>
-    <li v-for="page in totalPages" v-bind:key="page">
-      <nuxt-link :to="{ query : { page: page }}">{{ page }}</nuxt-link>
+  <ul class="pagination">
+    <li
+      v-for="page in totalPages"
+      v-bind:key="page"
+      :class="`pageItem`">
+      <nuxt-link
+        :to="{ query : { page: page }}"
+        class="pageLink">{{ page }}</nuxt-link>
     </li>
   </ul>
 </div>
@@ -74,6 +79,25 @@ export default {
         width: 540px;
         height: 540px;
         object-fit: cover;
+      }
+    }
+  }
+  .pagination {
+    text-align: center;
+    .pageItem {
+      display: inline;
+      list-style-type: none;
+
+      .pageLink {
+        display: inline-block;
+        padding: 1em;
+        border: 1px solid #969696;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+      .nuxt-link-exact-active {
+          background-color: #969696;
+          color: #fff;
       }
     }
   }
