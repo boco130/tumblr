@@ -50,7 +50,7 @@ export default {
         return {
           tumblrData: res.data.response.posts,
           totalPosts: res.data.response.total_posts,
-          totalPages: Math.ceil( res.data.response.total_posts / 20 ) + 1
+          totalPages: Math.ceil( res.data.response.total_posts / 20 )
         }
       })
   },
