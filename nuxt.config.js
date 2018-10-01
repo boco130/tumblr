@@ -44,4 +44,9 @@ module.exports = {
     API_URL: process.env.FRONT_API_URL,
     API_KEY: process.env.FRONT_API_KEY
   },
+  router: {
+    scrollBehavior: function (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
+  }
 }

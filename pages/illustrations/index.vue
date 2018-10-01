@@ -14,6 +14,16 @@
         :height = tumblrData.photos[0].alt_sizes[2].height>
     </li>
   </ul>
+  <ul class="pagination">
+    <li
+      v-for="page in totalPages"
+      v-bind:key="page"
+      :class="`pageItem`">
+      <nuxt-link
+        :to="{ query : { page: page }}"
+        class="pageLink">{{ page }}</nuxt-link>
+    </li>
+  </ul>
 </div>
 </template>
 
@@ -28,15 +38,22 @@ export default {
   data () {
     tumblrData: new Array;
   },
-  asyncData ({}) {
+  watchQuery: ['page'],
+  asyncData ({ query }) {
     let domain = process.env.API_URL
     let apikey = process.env.API_KEY
-    var url = 'http://api.tumblr.com/v2/blog/' + domain + '/posts?api_key=' + apikey 
+    let category = 'photo'
+    let offset = ( query.page - 1 ) * 20
+    let url = 'http://api.tumblr.com/v2/blog/' + domain + '/posts/' + category + '?api_key=' + apikey + '&offset=' + offset
     return axios.get(url)
       .then((res) => {
-        return { tumblrData: res.data.response.posts }
+        return {
+          tumblrData: res.data.response.posts,
+          totalPosts: res.data.response.total_posts,
+          totalPages: Math.ceil( res.data.response.total_posts / 20 )
+        }
       })
-  }
+  },
 }
 </script>
 
@@ -62,6 +79,25 @@ export default {
         width: 540px;
         height: 540px;
         object-fit: cover;
+      }
+    }
+  }
+  .pagination {
+    text-align: center;
+    .pageItem {
+      display: inline;
+      list-style-type: none;
+
+      .pageLink {
+        display: inline-block;
+        padding: 1em;
+        border: 1px solid #969696;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+      .nuxt-link-exact-active {
+          background-color: #969696;
+          color: #fff;
       }
     }
   }
