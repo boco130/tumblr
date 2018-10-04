@@ -14,26 +14,19 @@
         :height = tumblrData.photos[0].alt_sizes[2].height>
     </li>
   </ul>
-  <ul class="pagination">
-    <li
-      v-for="page in totalPages"
-      v-bind:key="page"
-      :class="`pageItem`">
-      <nuxt-link
-        :to="{ query : { page: page }}"
-        class="pageLink">{{ page }}</nuxt-link>
-    </li>
-  </ul>
+  <v-pagination
+    :currentPage = "$route.query.page"
+    :totalPages = "totalPages"/>
 </div>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
 import axios from 'axios'
+import vPagination from '~/components/pagination/index.vue'
 
 export default {
   components: {
-    AppLogo,
+    vPagination,
   },
   data () {
     tumblrData: new Array;
@@ -50,7 +43,7 @@ export default {
         return {
           tumblrData: res.data.response.posts,
           totalPosts: res.data.response.total_posts,
-          totalPages: Math.ceil( res.data.response.total_posts / 20 )
+          totalPages: Math.ceil( res.data.response.total_posts / 20 ),
         }
       })
   },
@@ -79,25 +72,6 @@ export default {
         width: 540px;
         height: 540px;
         object-fit: cover;
-      }
-    }
-  }
-  .pagination {
-    text-align: center;
-    .pageItem {
-      display: inline;
-      list-style-type: none;
-
-      .pageLink {
-        display: inline-block;
-        padding: 1em;
-        border: 1px solid #969696;
-        margin: 0 10px;
-        text-decoration: none;
-      }
-      .nuxt-link-exact-active {
-          background-color: #969696;
-          color: #fff;
       }
     }
   }
