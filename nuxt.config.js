@@ -50,6 +50,6 @@ module.exports = {
     }
   },
   css: [
-    '~/assets/css/base.scss'
+    // '~/assets/css/base.scss'
   ],
 }

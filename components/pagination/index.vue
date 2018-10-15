@@ -1,5 +1,6 @@
 <template>
   <ul class="vPagination">
+    {{ paginationNumber(currentPage, totalPages, displayCount) }}
     <li class="pageItem">
       <nuxt-link class="pageLink" :to="{ query : { page: 1 }}">
         ＜＜
@@ -10,6 +11,9 @@
         ＜
       </nuxt-link>
     </li>
+
+
+
     <div v-if="currentPage < 4" class="pagination">
       <li
         v-for="page in 5"
@@ -40,6 +44,9 @@
           class="pageLink">{{ totalPages - 5 + page }}</nuxt-link>
       </li>
     </div>
+
+
+
     <li class="pageItem">
       <nuxt-link
         class="pageLink" :to="totalPages - currentPage > 1 ? { query : { page: currentPage + 1 }} : false">
@@ -63,8 +70,22 @@ export default {
     },
     totalPages: {
       type: Number,
-      require: true,
+      required: true,
     },
+    displayCount: {
+      type: Number,
+      required: true,
+      /* 奇数じゃなきゃいやだ… */
+    },
+  },
+  methods: {
+    paginationNumber (currentPage, totalPages, displayCount) {
+      const offset = Math.ceil(displayCount / 2);
+      // const offset = (displayCount / 2).ceil;
+      if (currentPage <= offset) {
+        return [1,2,3,4,5]
+      }
+    }
   },
 };
 </script>

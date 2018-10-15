@@ -16,7 +16,8 @@
   </ul>
   <v-pagination
     :currentPage = "$route.query.page"
-    :totalPages = "13"/>
+    :totalPages = "13"
+    :displayCount = "5"/>
 </div>
 </template>
 
