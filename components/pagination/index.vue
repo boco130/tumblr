@@ -1,22 +1,18 @@
 <template>
   <ul class="vPagination">
-    {{ paginationNumber(currentPage, totalPages, displayCount) }}
-    <li class="pageItem">
-      <nuxt-link class="pageLink" :to="{ query : { page: 1 }}">
-        ＜＜
-      </nuxt-link>
-    </li>
-    <li class="pageItem">
-      <nuxt-link class="pageLink" :to="currentPage > 1 ? { query : { page: currentPage - 1 }} : false">
-        ＜
-      </nuxt-link>
-    </li>
-
-
-
-    <div v-if="currentPage < 4" class="pagination">
+    <div
+      v-if="currentPage > 1"
+      class="pageFeeding">
+      <li class="pageItem">
+        <nuxt-link class="pageLink" :to="{ query : { page: 1 }}">＜＜</nuxt-link>
+      </li>
+      <li class="pageItem">
+        <nuxt-link class="pageLink" :to="{ query : { page: currentPage - 1 }}">＜</nuxt-link>
+      </li>
+    </div>
+    <div class="pagination">
       <li
-        v-for="page in 5"
+        v-for="page in paginationNumber(currentPage, totalPages, displayCount)"
         v-bind:key="page"
         :class="`pageItem`">
         <nuxt-link
@@ -24,40 +20,17 @@
           class="pageLink">{{ page }}</nuxt-link>
       </li>
     </div>
-    <div v-else-if="3 < currentPage && currentPage < (totalPages - 2)" class="pagination">
-      <li
-        v-for="page in 5"
-        v-bind:key="page + currentPage"
-        :class="`pageItem`">
+    <div
+      v-if="totalPages - currentPage > 1"
+      class="pageFeeding">
+      <li class="pageItem">
         <nuxt-link
-          :to="{ query : { page: currentPage - 3 + page  }}"
-          class="pageLink">{{ currentPage - 3 + page }}</nuxt-link>
+          class="pageLink" :to="{ query : { page: currentPage + 1 }}">＞</nuxt-link>
+      </li>
+      <li class="pageItem">
+        <nuxt-link class="pageLink" :to="{ query : { page: totalPages }}">＞＞</nuxt-link>
       </li>
     </div>
-    <div v-else-if="currentPage = (totalPages - 1)" class="pagination">
-      <li
-        v-for="page in 5"
-        v-bind:key="page + currentPage"
-        class="pageItem">
-        <nuxt-link
-          :to="{ query : { page: totalPages - 5 + page  }}"
-          class="pageLink">{{ totalPages - 5 + page }}</nuxt-link>
-      </li>
-    </div>
-
-
-
-    <li class="pageItem">
-      <nuxt-link
-        class="pageLink" :to="totalPages - currentPage > 1 ? { query : { page: currentPage + 1 }} : false">
-        ＞
-      </nuxt-link>
-    </li>
-    <li class="pageItem">
-      <nuxt-link class="pageLink" :to="{ query : { page: totalPages }}">
-        ＞＞
-      </nuxt-link>
-    </li>
   </ul>
 </template>
 
@@ -74,17 +47,26 @@ export default {
     },
     displayCount: {
       type: Number,
-      required: true,
-      /* 奇数じゃなきゃいやだ… */
+      default: 5,
+      validator(value) {
+        return value % 2 !== 0;
+      },
     },
   },
   methods: {
-    paginationNumber (currentPage, totalPages, displayCount) {
+    paginationNumber(currentPage, totalPages, displayCount) {
       const offset = Math.ceil(displayCount / 2);
-      // const offset = (displayCount / 2).ceil;
-      if (currentPage <= offset) {
-        return [1,2,3,4,5]
+      let paginationAry = [];
+      for (var i = 1; i <= displayCount; i++) {
+        if (currentPage <= offset) {
+          paginationAry.push(i);
+        } else if (offset < currentPage && currentPage < (totalPages - 2)) {
+          paginationAry.push(i + currentPage - offset);
+        } else {
+          paginationAry.push(totalPages - displayCount + i);
+        }
       }
+      return paginationAry;
     }
   },
 };
@@ -94,7 +76,8 @@ export default {
 .vPagination {
   text-align: center;
 
-  .pagination {
+  .pagination,
+  .pageFeeding {
     display: inline;
   }
   .pageItem {
