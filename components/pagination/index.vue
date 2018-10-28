@@ -57,6 +57,9 @@ export default {
     paginationNumber(currentPage, totalPages, displayCount) {
       const offset = Math.ceil(displayCount / 2);
       let paginationAry = [];
+      if(totalPages < displayCount) {
+        displayCount = totalPages;
+      }
       for (var i = 1; i <= displayCount; i++) {
         if (currentPage <= offset) {
           paginationAry.push(i);
