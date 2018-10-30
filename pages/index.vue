@@ -5,11 +5,12 @@
         TOTORIKA<br>
         ART WORKS
       </h1>
-      <div class="nav">
-        <a href="http://trkttrk.tumblr.com/" target="_blank" class="nav_button">ILLUSTRATIONS</a><br>
-        <router-link to="/event" class="nav_button">EVENT INFO</router-link><br>
-        <router-link to="/contact" class="nav_button">CONTACT</router-link>
-      </div>
+      <ul class="nav">
+        <li><router-link to="/illustrations" class="nav_button">ILLUSTRATIONS</router-link></li>
+        <li><router-link to="/event" class="nav_button">EVENTS</router-link></li>
+        <li><router-link to="/goods" class="nav_button">GOODS</router-link></li>
+        <li><router-link to="/contact" class="nav_button">CONTACT</router-link></li>
+      </ul>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@
 import AppLogo from '~/components/AppLogo.vue'
 
 export default {
+  layout: 'top',
   components: {
     AppLogo
   }
@@ -25,23 +27,27 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+body
+  position: relative
+
 .container
   background-size: cover
-  background-position: center center
-  background-reat: no-repeat
-  background-color: #00beb9
-  // background-image: url('/assets/img/index/bg.jpg')
+  background-position: top right
+  background-repeat: no-repeat
+  background-image: url('/assets/img/index/bg.jpg')
   width: 75%
   height: 80vh
   margin-top: 10vh
-  display: flex
-  align-items: center
+
+  @media (min-width: 651px)
+    display: flex
+    align-items: center
 
   .content
-    margin-left: 75%
-
-    @media (max-width: 1800px)
-      margin-left: 50%
+    position: absolute
+    transform: translateY(-50%)
+    top: 50%
+    right: 10vh
 
     .title
       font-family: 'Montserrat', sans-serif
@@ -58,22 +64,24 @@ export default {
       border-left: 1px solid #000
       padding-left: 50px
       margin-top: 50px
+      list-style-type: none
+
+      li
+        margin-bottom: 10px
+
+        &:last-child
+          margin-bottom: 0
 
       a
         color: inherit
         text-decoration: none
         z-index: 1
         display: inline-block
-        margin-bottom: 30px
         padding-bottom: 1px
 
         &:hover
           padding-bottom: 0
           border-bottom: 1px solid #000
-
-        
-        &:last-child
-          margin-bottom: 0
 
     @media (max-width: 1300px)
       .title
@@ -82,15 +90,25 @@ export default {
       .nav
         font-size: 14px
 
-  @media (max-width: 650px)
+@media (max-width: 650px)
+  .container
     width: 100%
     height: 100vh
     margin: 0
 
     .content
-      margin: 20px
-
-    .nav
-      margin-buttom: 0
+      position: static
+      transform: none
+      top: auto
+      padding: 20px
       
+      .title
+        font-size: 8vw
+        font-weight: bold
+
+      .nav
+        position: absolute
+        bottom: 20px
+        padding-left: 20px
+        letter-spacing: .5em
 </style>

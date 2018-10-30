@@ -1,8 +1,5 @@
 <template>
 <div class="illust">
-  <div class="headig">
-    <h1>illustlations</h1>
-  </div>
   <ul class="illustList">
     <li
       v-for="tumblrData in tumblrData"
@@ -50,30 +47,60 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.illust {
-  width: 100%;
+<style lang="sass" scoped>
+.illust
+  width: 100%
 
-  .illustList {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    padding: 0;
-    width: 1640px;
+  .illustList
+    list-style-type: none
+    display: flex
+    flex-wrap: wrap
+    margin: 0 auto
+    padding: 0
+    max-width: 1110px
 
-    .illustItem {
-      padding: 0 10px 10px 0;
+    .illustItem
+      margin: 0 30px 30px 0
 
-      &:nth-child(3n) {
-        padding-right: 0;
-      }
-      img {
-        width: 540px;
-        height: 540px;
-        object-fit: cover;
-      }
-    }
-  }
-}
+      &:nth-child(3n)
+        margin-right: 0
+    
+      img
+        width: 350px
+        height: 350px
+        object-fit: cover
+
+  @media (max-width: 1210px)
+    .illustList
+      max-width: 760px
+
+      .illustItem
+        &:nth-child(3n)
+          margin-right: 30px
+        &:nth-child(2n)
+          margin-right: 0
+
+  @media (max-width: 860px)
+    .illustList
+      width: 100%
+      max-width: none
+      padding: 0 50px
+
+      .illustItem
+        width: calc((100% - 30px) / 2 )
+        position: relative
+
+        &::before
+          padding-top: 100%
+          content: "ねこ"
+          display: block
+
+        img
+          width: 100%
+          height: 100%
+          position: absolute
+          top: 0
+          left: 0
+
+
 </style>

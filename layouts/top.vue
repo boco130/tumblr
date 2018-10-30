@@ -1,20 +1,8 @@
 <template>
   <div>
-    <v-heading/>
     <nuxt/>
   </div>
 </template>
-
-<script>
-import vHeading from '~/components/heading/index.vue'
-
-export default {
-  components: {
-    vHeading,
-  },
-}
-</script>
-
 
 <style>
 html {
@@ -66,4 +54,3 @@ body {
   background-color: #35495e;
 }
 </style>
-
