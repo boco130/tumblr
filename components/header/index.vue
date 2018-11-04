@@ -123,6 +123,9 @@ export default {
       svg
         fill: #fff
 
+    .hamburgerMenu
+      display: block
+
     .isDisplay
       position: fixed
       top: 0
