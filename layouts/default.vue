@@ -1,16 +1,27 @@
 <template>
   <div>
-    <v-heading/>
+    <v-heading
+      :pageTitle = "title"/>
     <nuxt/>
+    <v-footer/>
   </div>
 </template>
 
 <script>
 import vHeading from '~/components/heading/index.vue'
+import vFooter from '~/components/footer/index.vue'
 
 export default {
   components: {
     vHeading,
+    vFooter,
+  },
+  computed: {
+    title () {
+      return this.$route.matched.map((r) => {
+        return (r.components.default.options ? r.components.default.options.pageTitle : r.components.default.pageTitle)
+      })[0]
+    },
   },
 }
 </script>

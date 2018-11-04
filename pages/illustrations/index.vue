@@ -22,11 +22,20 @@ import axios from 'axios'
 import vPagination from '~/components/pagination/index.vue'
 
 export default {
+  pageTitle: 'ILLUSTRATIONS',
+  head () {
+    return {
+      title: this.pageTitle,
+    }
+  },
   components: {
     vPagination,
   },
   data () {
     tumblrData: new Array;
+    return {
+      pageTitle: 'ILLUSTRATIONS',
+    }
   },
   watchQuery: ['page'],
   asyncData ({ query }) {
@@ -84,11 +93,18 @@ export default {
     .illustList
       width: 100%
       max-width: none
-      padding: 0 50px
+      padding: 0 20px
 
       .illustItem
-        width: calc((100% - 30px) / 2 )
+        // width: 100%
+        width: calc((100% - 20px) / 2 )
         position: relative
+        margin-right: 20px
+
+        &:nth-child(3n)
+          margin-right: 20px
+        &:nth-child(2n)
+          margin-right: 0
 
         &::before
           padding-top: 100%

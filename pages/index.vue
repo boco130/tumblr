@@ -7,7 +7,7 @@
       </h1>
       <ul class="nav">
         <li><router-link to="/illustrations" class="nav_button">ILLUSTRATIONS</router-link></li>
-        <li><router-link to="/event" class="nav_button">EVENTS</router-link></li>
+        <li><router-link to="/events" class="nav_button">EVENTS</router-link></li>
         <li><router-link to="/goods" class="nav_button">GOODS</router-link></li>
         <li><router-link to="/contact" class="nav_button">CONTACT</router-link></li>
       </ul>
@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
   layout: 'top',
   components: {
-    AppLogo
   }
 }
 </script>

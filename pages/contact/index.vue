@@ -4,11 +4,14 @@
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
+  pageTitle: 'CONTACT',
+  head () {
+    return {
+      title: this.pageTitle,
+    }
+  },
   components: {
-    AppLogo
   }
 }
 </script>
