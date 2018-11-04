@@ -136,6 +136,4 @@ export default {
 
       .pageLink
         margin: 0 10px
-
-
 </style>
