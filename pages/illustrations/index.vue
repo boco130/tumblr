@@ -23,11 +23,6 @@ import vPagination from '~/components/pagination/index.vue'
 
 export default {
   pageTitle: 'ILLUSTRATIONS',
-  head () {
-    return {
-      title: this.pageTitle,
-    }
-  },
   components: {
     vPagination,
   },
@@ -73,7 +68,7 @@ export default {
 
       &:nth-child(3n)
         margin-right: 0
-    
+
       img
         width: 350px
         height: 350px

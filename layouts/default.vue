@@ -23,6 +23,11 @@ export default {
       })[0]
     },
   },
+  head () {
+    return {
+      title: this.$route.name.toUpperCase(),
+    }
+  },
 }
 </script>
 
